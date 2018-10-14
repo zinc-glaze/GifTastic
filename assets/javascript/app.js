@@ -1,7 +1,7 @@
-//FILM ICONS - MEN ON SCREEN
+//FILM ICONS
 
 //Global Variables
-var topics = ["David Bowie", "Harry Dean Stanton", "Bill Murray", "Alain Delon", "Klaus Kinski", "Richard Pryor", "Christopher Walken", "Clint Eastwood", "Daniel Day Lewis", "Ice Cube", "James Dean", "Sean Connery", "Samuel L. Jackon", "Bruce Lee", "Gary Oldman", "James Earl Jones", "Lee Marvin"];
+var topics = ["Harry Dean Stanton", "Bill Murray", "David Bowie", "Alain Delon", "Keanu Reeves", "Richard Pryor", "Boris Karloff", "Christopher Walken", "Clint Eastwood", "Charlie Chaplin", "Ice Cube", "Nicholas Cage", "James Dean", "Sean Connery", "Kyle MacLachlan", "Samuel L. Jackon", "Bruce Lee", "Anthony Perkins"];
 
 var apikey = "JXO4iEGPO0SUcoMaAxl4GwMPUdSZgGOy";
 
@@ -13,7 +13,8 @@ function makeButtons() {
   for (i = 0; i < topics.length; i++) {
     var topicButton = $("<button>");
     //adds Bootstrap classes and data-name attribute
-    topicButton.addClass("btn btn-primary m-1");
+    topicButton.addClass("btn btn-secondary m-1");
+    topicButton.attr("id", "call-button");
     topicButton.attr("data-name", topics[i]);
     topicButton.text(topics[i]);
     $("#topic-buttons").append(topicButton);
@@ -28,12 +29,52 @@ function addUserButton() {
   $("#user-topic").val("");
 }
 
-//Renders default buttons on refresh
-makeButtons();
 
-//Click event for adding new button
-$("#submit-topic").on("click", function(event) {
-  event.preventDefault();
-  addUserButton();
-})
+window.onload = function() {
+      
+  //Renders default buttons on refresh
+  makeButtons();
+
+  //Click event for adding new button
+  $("#submit-topic").on("click", function(event) {
+    event.preventDefault();
+    addUserButton();
+  })
+
+
+  //Event listener for topic buttons
+  $(document).on("click", "#call-button", function(event) {
+    event.preventDefault();
+    //grabs search term from button attribute
+    var topic = $(this).attr("data-name");
+    //constructs search URL
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    topic + "&api_key=" + apikey + "&limit=10";
+    //AJAX request
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+    //after the data comes back from the API
+    .then(function(response) {
+      //stores results as array
+      var results = response.data;
+      console.log(results);
+      //empties current GIF gallery
+      $("#gif-gallery").empty();
+      //loops through results array
+      for (var i = 0; i < results.length; i++) {
+        //displays GIF on page
+        var gifDiv = $("<div>");
+        gifDiv.addClass("float-left m-1");
+        var gifImage = $("<img>");
+        gifImage.addClass("rounded")
+        gifImage.attr("src", results[i].images.fixed_height.url);
+        gifDiv.append(gifImage);
+        $("#gif-gallery").prepend(gifDiv);
+      }
+    });
+  });
+
+};
 
