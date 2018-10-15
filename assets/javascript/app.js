@@ -1,9 +1,9 @@
 //ICONIC ACTORS!
 
 //GLOBAL VARIABLES
-var topics = ["Harry Dean Stanton", "Bill Murray", "David Bowie", "Alain Delon", "Keanu Reeves", "Richard Pryor", "Boris Karloff", "Christopher Walken", "Clint Eastwood", "Charlie Chaplin", "Ice Cube", "Nicholas Cage", "James Dean", "Sean Connery", "Kyle MacLachlan", "Samuel L. Jackon", "Bruce Lee", "Anthony Perkins"];
+// var topics = ["Harry Dean Stanton", "Bill Murray", "David Bowie", "Alain Delon", "Keanu Reeves", "Richard Pryor", "Boris Karloff", "Christopher Walken", "Clint Eastwood", "Charlie Chaplin", "Ice Cube", "Nicholas Cage", "James Dean", "Sean Connery", "Kyle MacLachlan", "Samuel L. Jackon", "Bruce Lee", "Anthony Perkins"];
 
-// var topics = ["Dracula", "Frankenstein", "Wolfman", "Orc", "Brundlefly", "The Mummy", "Predator", "The Rancor", "Freddy Kreuger", "Pale Man", "King Kong", "Xenomorph", "Godzilla", "Nosferatu", "Mothra", "Pinhead"];
+var topics = ["Dracula", "Frankenstein", "Wolfman", "The Thing", "Brundlefly", "The Mummy", "Predator", "Rancor", "Freddy Kreuger", "Pale Man", "King Kong", "Babadook", "Xenomorph", "Godzilla", "Nosferatu", "Mothra", "Pinhead", "Medusa", "Jason Voorhees", "Gremlin", "Jaws"];
 
 var apikey = "JXO4iEGPO0SUcoMaAxl4GwMPUdSZgGOy";
 
@@ -15,7 +15,7 @@ function makeButtons() {
   for (i = 0; i < topics.length; i++) {
     var topicButton = $("<button>");
     //adds Bootstrap classes and data-name attribute
-    topicButton.addClass("btn btn-secondary m-1");
+    topicButton.addClass("btn btn-danger m-1");
     topicButton.attr("id", "call-button");
     topicButton.attr("data-name", topics[i]);
     topicButton.text(topics[i]);
@@ -69,15 +69,32 @@ window.onload = function() {
         gifDiv.addClass("float-left m-1");
         var rating = results[i].rating;
         var caption = $("<figcaption>").text("Rating: " + rating);
-        caption.addClass("text-dark");
+        caption.addClass("m-1 font-weight-light");
         var gifImage = $("<img>");
-        gifImage.addClass("rounded")
-        gifImage.attr("src", results[i].images.fixed_height.url);
+        gifImage.addClass("gif rounded")
+        gifImage.attr("src", results[i].images.fixed_height_still.url);
+        gifImage.attr("data-still", results[i].images.fixed_height_still.url);
+        gifImage.attr("data-animate", results[i].images.fixed_height.url);
+        gifImage.attr("data-state", "still");
         gifDiv.append(gifImage);
         gifDiv.append(caption);
         $("#gif-gallery").prepend(gifDiv);
       }
+      $("#gif-gallery").prepend("<p>Click a GIF to animate!</p>")
     });
   });
+
+  //Event listener for GIF pause/play
+  $(document).on("click", ".gif", function() {
+    var state = $(this).attr("data-state");
+    if (state === "still") {
+      $(this).attr("src", $(this).attr("data-animate"));
+      $(this).attr("data-state", "animate");
+    } else {
+      $(this).attr("src", $(this).attr("data-still"));
+      $(this).attr("data-state", "still");
+    }
+  });
+
 };
 
