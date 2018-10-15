@@ -63,7 +63,7 @@ window.onload = function() {
       $("#gif-gallery").empty();
       //loops through results array
       for (var i = 0; i < results.length; i++) {
-        //displays GIF on page
+        //Creates div with GIF and caption
         var gifDiv = $("<div>");
         gifDiv.addClass("gif-div float-left m-1");
         var rating = results[i].rating;
@@ -71,15 +71,17 @@ window.onload = function() {
         caption.addClass("m-1 font-weight-light");
         var gifImage = $("<img>");
         gifImage.addClass("gif rounded")
+        //adds attributes used for play/pause function
         gifImage.attr("src", results[i].images.fixed_height_still.url);
         gifImage.attr("data-still", results[i].images.fixed_height_still.url);
         gifImage.attr("data-animate", results[i].images.fixed_height.url);
         gifImage.attr("data-state", "still");
         gifDiv.append(gifImage);
         gifDiv.append(caption);
+        //puts GIF div on page
         $("#gif-gallery").prepend(gifDiv);
       }
-      $("#gif-gallery").prepend("<p>Click a GIF to animate!</p>")
+      $("#gif-gallery").prepend("<p>Click GIFs to animate or pause!</p>")
     });
   });
 
