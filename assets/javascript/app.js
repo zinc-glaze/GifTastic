@@ -1,11 +1,13 @@
-//FILM ICONS
+//ICONIC ACTORS!
 
-//Global Variables
+//GLOBAL VARIABLES
 var topics = ["Harry Dean Stanton", "Bill Murray", "David Bowie", "Alain Delon", "Keanu Reeves", "Richard Pryor", "Boris Karloff", "Christopher Walken", "Clint Eastwood", "Charlie Chaplin", "Ice Cube", "Nicholas Cage", "James Dean", "Sean Connery", "Kyle MacLachlan", "Samuel L. Jackon", "Bruce Lee", "Anthony Perkins"];
+
+// var topics = ["Dracula", "Frankenstein", "Wolfman", "Orc", "Brundlefly", "The Mummy", "Predator", "The Rancor", "Freddy Kreuger", "Pale Man", "King Kong", "Xenomorph", "Godzilla", "Nosferatu", "Mothra", "Pinhead"];
 
 var apikey = "JXO4iEGPO0SUcoMaAxl4GwMPUdSZgGOy";
 
-//Functions
+//FUNCTIONS
 
 //Generates buttons from the topics array
 function makeButtons() {
@@ -29,7 +31,7 @@ function addUserButton() {
   $("#user-topic").val("");
 }
 
-
+//MAIN PROCESS
 window.onload = function() {
       
   //Renders default buttons on refresh
@@ -41,10 +43,8 @@ window.onload = function() {
     addUserButton();
   })
 
-
   //Event listener for topic buttons
   $(document).on("click", "#call-button", function(event) {
-    event.preventDefault();
     //grabs search term from button attribute
     var topic = $(this).attr("data-name");
     //constructs search URL
@@ -67,14 +67,17 @@ window.onload = function() {
         //displays GIF on page
         var gifDiv = $("<div>");
         gifDiv.addClass("float-left m-1");
+        var rating = results[i].rating;
+        var caption = $("<figcaption>").text("Rating: " + rating);
+        caption.addClass("text-dark");
         var gifImage = $("<img>");
         gifImage.addClass("rounded")
         gifImage.attr("src", results[i].images.fixed_height.url);
         gifDiv.append(gifImage);
+        gifDiv.append(caption);
         $("#gif-gallery").prepend(gifDiv);
       }
     });
   });
-
 };
 
