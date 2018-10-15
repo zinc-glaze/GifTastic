@@ -1,3 +1,13 @@
 body {
     background-image: url("../images/pw_maze_black.png");
 }
+
+.gif {
+    border: 1px solid #dc3545;
+}
+
+.gif:hover {
+    cursor: pointer;
+    border: 1px solid #ffc107;
+}
+

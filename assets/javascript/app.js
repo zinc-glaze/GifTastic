@@ -1,7 +1,6 @@
-//ICONIC ACTORS!
+//MOVIE MONSTERS!
 
 //GLOBAL VARIABLES
-// var topics = ["Harry Dean Stanton", "Bill Murray", "David Bowie", "Alain Delon", "Keanu Reeves", "Richard Pryor", "Boris Karloff", "Christopher Walken", "Clint Eastwood", "Charlie Chaplin", "Ice Cube", "Nicholas Cage", "James Dean", "Sean Connery", "Kyle MacLachlan", "Samuel L. Jackon", "Bruce Lee", "Anthony Perkins"];
 
 var topics = ["Dracula", "Frankenstein", "Wolfman", "The Thing", "Brundlefly", "The Mummy", "Predator", "Rancor", "Freddy Kreuger", "Pale Man", "King Kong", "Babadook", "Xenomorph", "Godzilla", "Nosferatu", "Mothra", "Pinhead", "Medusa", "Jason Voorhees", "Gremlin", "Jaws"];
 
@@ -15,7 +14,7 @@ function makeButtons() {
   for (i = 0; i < topics.length; i++) {
     var topicButton = $("<button>");
     //adds Bootstrap classes and data-name attribute
-    topicButton.addClass("btn btn-danger m-1");
+    topicButton.addClass("btn btn-danger m-1 font-weight-bold");
     topicButton.attr("id", "call-button");
     topicButton.attr("data-name", topics[i]);
     topicButton.text(topics[i]);
@@ -66,7 +65,7 @@ window.onload = function() {
       for (var i = 0; i < results.length; i++) {
         //displays GIF on page
         var gifDiv = $("<div>");
-        gifDiv.addClass("float-left m-1");
+        gifDiv.addClass("gif-div float-left m-1");
         var rating = results[i].rating;
         var caption = $("<figcaption>").text("Rating: " + rating);
         caption.addClass("m-1 font-weight-light");
