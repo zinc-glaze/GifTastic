@@ -9,29 +9,30 @@
 </head>
 <body>
   <div class="container-fluid w-75">
-    <div class="row mt-3 mb-2 mx-3">
+    <div class="row m-3">
       <div class="col-sm-12 text-center">
         <h4 class="text-warning">Click the red buttons to generate a Monster GIF Gallery (if you dare!)</h4>
       </div>
     </div>
     <div class="row mb-3 mx-3">
-      <div class="col-sm-12" id="topic-buttons">
+      <div class="col-sm-9" id="topic-buttons">
         <!-- Buttons go here -->
       </div>
-    </div>
-    <div class="row m-3">
-      <div class="col-sm-10 text-light text-center h6" id="gif-gallery">
-        <!-- GIFs go here -->
-      </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <form>
           <div class="form-group">
-            <label for="user-topic" class="h6 font-italic text-warning">Add a Monster to the List!</label>
+            <label for="user-topic" class="h6 font-italic text-warning">Add a New Monster to the List!</label>
             <input type="text" class="form-control" id="user-topic">
           </div>
           <button type="submit" class="btn btn-warning btn-sm" id="submit-topic">Add Monster</button>
         </form>
       </div>
+    </div>
+    <div class="row m-3">
+      <div class="col-sm-12 text-light text-center h6" id="gif-gallery">
+        <!-- GIFs go here -->
+      </div>
+      
     </div>
   </div>
 
